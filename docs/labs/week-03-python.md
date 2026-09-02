@@ -1,8 +1,8 @@
 # Week 3 Zoom Lab: Python Research Workflow
 
-## Exploring Headlines with Python
+## Exploring TikTok User Experiences with Python
 
-Today, you will practice reading, running, modifying, and explaining simple Python code. The activities use the ideas introduced in class:
+Today, you will practice reading, running, modifying, and explaining simple Python code using data from a **fictional TikTok user-experience study**. The research context is new, but the core Python ideas are the ones introduced in class:
 
 * variables and `=`
 * text and quotation marks
@@ -110,13 +110,13 @@ How I verified the result:
 
 ---
 
-# Group 1: Store and Display a Headline
+# Group 1: Store and Display a Comment
 
 Copy this code into a code cell:
 
 ```python
-headline = "AI Changes Journalism"
-print(headline)
+comment = "The Algorithm Knows What I Like"
+print(comment)
 ```
 
 ### A. Predict and Explain
@@ -125,25 +125,25 @@ Before running the code, discuss:
 
 1. Which part is the variable name?
 2. What does `=` tell Python to do?
-3. Why does the headline need quotation marks?
+3. Why does the comment need quotation marks?
 4. What do you predict will appear under the cell?
 
 Run the code and check your prediction.
 
 ### B. Modify the Code
 
-Change the stored headline to `Gamecocks Win Season Opener`. Run the cell again and explain why the output changed.
+Change the stored comment to `There Are Too Many Ads Now`. Run the cell again and explain why the output changed.
 
-Then create a second variable called `source` that stores the text `The Daily News`. Print both variables.
+Then create a second variable called `participant` that stores the text `P07`. Print both variables.
 
 ### C. AI-Assisted Modification: Print Both on One Line
 
-Ask AI to show you the simplest way to print the headline and source together on one line, separated by a hyphen.
+Ask AI to show you the simplest way to print the participant ID and comment together on one line, separated by a hyphen.
 
 Your intended output is:
 
 ```text
-Gamecocks Win Season Opener - The Daily News
+P07 - There Are Too Many Ads Now
 ```
 
 Run the suggestion and verify that both pieces of text appear in the correct order.
@@ -155,11 +155,11 @@ Run the suggestion and verify that both pieces of text appear in the correct ord
 Copy and run this code:
 
 ```python
-headlines = [
-    "AI changes journalism",
-    "Gamecocks win season opener",
-    "New music festival announced",
-    "Local reporters test new technology"
+comments = [
+    "The algorithm knows what I like",
+    "There are too many ads now",
+    "I like discovering new creators",
+    "The For You page feels repetitive"
 ]
 ```
 
@@ -168,30 +168,30 @@ headlines = [
 Before running these lines, predict each output:
 
 ```python
-print(headlines[0])
-print(headlines[1])
-print(headlines[2])
+print(comments[0])
+print(comments[1])
+print(comments[2])
 ```
 
 Run the code and check your predictions.
 
 ### B. Modify the Code
 
-1. Write one line that prints the fourth headline.
-2. Change the second headline in the list to a headline of your choice.
-3. Run your retrieval code again and confirm that the new headline appears.
+1. Write one line that prints the fourth comment.
+2. Change the second comment in the list to a comment of your choice.
+3. Run your retrieval code again and confirm that the new comment appears.
 
 Complete this explanation:
 
 ```text
-headlines[0] retrieves the __________ item because Python starts counting at __________.
+comments[0] retrieves the __________ item because Python starts counting at __________.
 ```
 
 ### C. AI-Assisted Modification: Retrieve the Final Item Another Way
 
 Ask AI whether Python can retrieve the final list item without first counting the items. Ask it to explain the new index in plain English.
 
-Run the suggested code and verify that it returns the fourth headline.
+Run the suggested code and verify that it returns the fourth comment.
 
 ---
 
@@ -200,20 +200,20 @@ Run the suggested code and verify that it returns the fourth headline.
 Copy this code:
 
 ```python
-headlines = [
-    "AI changes journalism",
-    "Gamecocks win season opener",
-    "New music festival announced"
+comments = [
+    "The algorithm knows what I like",
+    "There are too many ads now",
+    "I like discovering new creators"
 ]
 
-print(len(headlines))
+print(len(comments))
 ```
 
 ### A. Predict and Explain
 
 Before running the code, discuss:
 
-1. What information is stored in `headlines`?
+1. What information is stored in `comments`?
 2. What action does `len()` perform?
 3. What output do you predict?
 
@@ -221,7 +221,7 @@ Run the code and check your prediction.
 
 ### B. Modify the Code
 
-Add two new headlines inside the square brackets. Run the code again.
+Add two new comments inside the square brackets. Run the code again.
 
 Discuss:
 
@@ -230,13 +230,13 @@ Discuss:
 
 ### C. AI-Assisted Modification: Add an Item with `.append()`
 
-Ask AI how to use `.append()` to add this headline after the list has already been created:
+Ask AI how to use `.append()` to add this comment after the list has already been created:
 
 ```text
-Students learn Python in research methods
+Sometimes I lose track of time while scrolling
 ```
 
-Print the list and its new length. Verify that the headline appears once and that the total increases by one.
+Print the list and its new length. Verify that the comment appears once and that the total increases by one.
 
 ---
 
@@ -245,14 +245,14 @@ Print the list and its new length. Verify that the headline appears once and tha
 Copy this code:
 
 ```python
-headlines = [
-    "AI changes journalism",
-    "Gamecocks win season opener",
-    "New music festival announced"
+comments = [
+    "The algorithm knows what I like",
+    "There are too many ads now",
+    "I like discovering new creators"
 ]
 
-for headline in headlines:
-    print(headline)
+for comment in comments:
+    print(comment)
 ```
 
 ### A. Predict and Explain
@@ -260,8 +260,8 @@ for headline in headlines:
 Before running the code, discuss:
 
 1. How many lines of output do you predict?
-2. What does `headline` represent during each repetition?
-3. Why is `print(headline)` indented?
+2. What does `comment` represent during each repetition?
+3. Why is `print(comment)` indented?
 
 Run the code and check your prediction.
 
@@ -273,15 +273,15 @@ Add this unindented line after the loop:
 print("Finished")
 ```
 
-Run the code. Explain why each headline prints once but `Finished` prints only once.
+Run the code. Explain why each comment prints once but `Finished` prints only once.
 
-Then temporarily remove the indentation before `print(headline)`. Run the code, read the error, restore the indentation, and confirm that it works again.
+Then temporarily remove the indentation before `print(comment)`. Run the code, read the error, restore the indentation, and confirm that it works again.
 
-### C. AI-Assisted Modification: Number the Headlines
+### C. AI-Assisted Modification: Number the Comments
 
-Ask AI for a beginner-friendly way to number the printed headlines `1`, `2`, and `3`. Ask it to explain only the new Python idea.
+Ask AI for a beginner-friendly way to number the printed comments `1`, `2`, and `3`. Ask it to explain only the new Python idea.
 
-Run the suggestion. Verify that every headline still appears and that the displayed numbers begin with `1`.
+Run the suggestion. Verify that every comment still appears and that the displayed numbers begin with `1`.
 
 ---
 
@@ -290,10 +290,10 @@ Run the suggestion. Verify that every headline still appears and that the displa
 Copy this code:
 
 ```python
-headline = "AI changes journalism"
+comment = "The algorithm knows what I like"
 
-if "AI" in headline:
-    print("This headline mentions AI")
+if "algorithm" in comment:
+    print("This comment mentions the algorithm")
 ```
 
 ### A. Predict and Explain
@@ -308,21 +308,21 @@ Run the code and check your answers.
 
 ### B. Modify the Code
 
-Change the stored headline to:
+Change the stored comment to:
 
 ```python
-headline = "Gamecocks win season opener"
+comment = "There are too many ads now"
 ```
 
 Run the code again. Explain why no message appears.
 
-Then change the condition so Python searches for `Gamecocks`. Run it and verify the result.
+Then change the condition so Python searches for `ads`. Run it and verify the result.
 
 ### C. AI-Assisted Modification: Add an `else`
 
-Ask AI how to make Python print `This headline does not mention AI` when the condition is not true. Ask it to use an `else` statement and explain how `if` and `else` work together.
+Ask AI how to make Python print `This comment does not mention the algorithm` when the condition is not true. Ask it to use an `else` statement and explain how `if` and `else` work together.
 
-Test the code with one headline that mentions AI and one that does not. Verify that exactly one message appears for each headline.
+Test the code with one comment that mentions the algorithm and one that does not. Verify that exactly one message appears for each comment.
 
 ---
 
@@ -331,23 +331,23 @@ Test the code with one headline that mentions AI and one that does not. Verify t
 Copy this code:
 
 ```python
-headlines = [
-    "AI changes journalism",
-    "Gamecocks win season opener",
-    "New music festival announced",
-    "Local reporters test new AI tool"
+comments = [
+    "The algorithm knows what I like",
+    "There are too many ads now",
+    "I like discovering new creators",
+    "The algorithm keeps recommending similar videos"
 ]
 
-for headline in headlines:
-    if "AI" in headline:
-        print(headline)
+for comment in comments:
+    if "algorithm" in comment:
+        print(comment)
 ```
 
 ### A. Predict and Explain
 
 Before running the code:
 
-1. Predict which headlines will print.
+1. Predict which comments will print.
 2. Identify the line that repeats.
 3. Identify the line that checks a condition.
 4. Explain why the final line has more indentation.
@@ -356,19 +356,19 @@ Run the code and compare the output with your prediction.
 
 ### B. Modify the Research Question
 
-Change the code so it prints only headlines containing `music`. Then add this headline to the list:
+Change the code so it prints only comments containing `creators`. Then add this comment to the list:
 
 ```text
-Music fans discuss new concert venue
+I follow creators who explain new dance trends
 ```
 
 Run the code again. Verify that the output answers the new question.
 
 ### C. AI-Assisted Modification: Count the Matches
 
-Ask AI to modify the original AI-search code so it also counts how many headlines contain `AI`. Ask it to use a simple counter and explain the new lines.
+Ask AI to modify the original algorithm-search code so it also counts how many comments contain `algorithm`. Ask it to use a simple counter and explain the new lines.
 
-Run the suggestion. Verify the count by manually checking the four headlines yourself.
+Run the suggestion. Verify the count by manually checking the four comments yourself.
 
 ---
 
@@ -377,25 +377,25 @@ Run the suggestion. Verify the count by manually checking the four headlines you
 Copy this code:
 
 ```python
-headlines = [
-    "AI changes journalism",
-    "Gamecocks win season opener",
-    "Local reporters test new ai tool"
+comments = [
+    "The algorithm knows what I like",
+    "There are too many ads now",
+    "The ALGORITHM recommends videos I enjoy"
 ]
 
-for headline in headlines:
-    if "AI" in headline:
-        print(headline)
+for comment in comments:
+    if "algorithm" in comment:
+        print(comment)
 ```
 
 ### A. Predict and Investigate
 
-Before running the code, predict whether Python will print both headlines that discuss AI.
+Before running the code, predict whether Python will print both comments that discuss the algorithm.
 
 Run the code and discuss:
 
-1. Which expected headline is missing?
-2. What difference do you notice between `AI` and `ai`?
+1. Which expected comment is missing?
+2. What difference do you notice between `algorithm` and `ALGORITHM`?
 3. Does Python treat uppercase and lowercase letters as identical here?
 
 ### B. Modify the Code
@@ -403,12 +403,12 @@ Run the code and discuss:
 Use `.lower()` to make the search ignore capitalization:
 
 ```python
-for headline in headlines:
-    if "ai" in headline.lower():
-        print(headline)
+for comment in comments:
+    if "algorithm" in comment.lower():
+        print(comment)
 ```
 
-Run the code and verify that both relevant headlines appear.
+Run the code and verify that both relevant comments appear.
 
 Complete this explanation:
 
@@ -418,38 +418,38 @@ The dot tells Python to use the __________ tool that belongs to the current ____
 
 ### C. AI-Assisted Modification: Search for Two Possible Words
 
-Ask AI to modify the condition so the code prints a headline when it contains either `ai` or `technology`, regardless of capitalization. Ask it to explain the word `or`.
+Ask AI to modify the condition so the code prints a comment when it contains either `algorithm` or `ads`, regardless of capitalization. Ask it to explain the word `or`.
 
-Add a headline containing `technology`, run the code, and manually verify every match.
+Add another comment containing `ads`, run the code, and manually verify every match.
 
 ---
 
 # Group 8: Debug and Verify a Small Workflow
 
-This code should print only headlines containing `AI`, but it has problems:
+This code should print only comments containing `algorithm`, but it has problems:
 
 ```python
-headlines = [
-    "AI changes journalism",
-    "Gamecocks win season opener",
-    "Local reporters test new AI tool"
+comments = [
+    "The algorithm knows what I like",
+    "There are too many ads now",
+    "The algorithm keeps recommending similar videos"
 ]
 
-for headline in headlines
-if "AI" in headline:
-print(headline)
+for comment in comments
+if "algorithm" in comment:
+print(comment)
 ```
 
 ### A. Predict the Intended Result
 
 Before running the code:
 
-1. Identify which headlines should print if the code works.
+1. Identify which comments should print if the code works.
 2. Identify the list, loop, condition, and action.
 
 ### B. Debug One Problem at a Time
 
-Run the code and read the first error. Fix one problem, run the code again, and continue until the intended headlines appear.
+Run the code and read the first error. Fix one problem, run the code again, and continue until the intended comments appear.
 
 Keep a record in a Markdown cell:
 
@@ -472,7 +472,7 @@ Explain the first remaining problem in this Python code.
 Give me one hint, but do not rewrite the full solution.
 ```
 
-After the code works, ask AI to add one final unindented line that reports `Search finished`. Verify that it appears once, after all matching headlines.
+After the code works, ask AI to add one final unindented line that reports `Search finished`. Verify that it appears once, after all matching comments.
 
 ---
 
@@ -495,4 +495,3 @@ By the end of the lab, the class should have practiced how to:
 
 !!! note
     Different groups will work with different Python ideas. During screen sharing, focus on understanding how each group translated its code into everyday language and verified its result.
-
