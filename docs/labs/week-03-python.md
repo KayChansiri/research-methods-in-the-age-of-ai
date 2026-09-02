@@ -2,22 +2,20 @@
 
 ## Exploring Headlines with Python
 
-Today, we will practice the exact Python ideas introduced in class:
+Today, you will practice reading, running, modifying, and explaining simple Python code. The activities use the ideas introduced in class:
 
-* storing information in a variable
-* grouping text in a list
-* retrieving one item with an index
-* repeating an instruction with a loop
-* using `if` to make a simple decision
-* using `.lower()` to work with capitalization
-* reading output and deciding whether it makes sense
+* variables and `=`
+* text and quotation marks
+* `print()` and `len()`
+* lists and indexes
+* loops and indentation
+* `if` and `in`
+* string tools such as `.lower()`
 
-The goal is **not to memorize Python syntax** or complete a real content analysis. The goal is to read short pieces of code, explain them in everyday language, run them, and check the result.
+The goal is **not to memorize Python syntax** or conduct a real content analysis. The goal is to understand what short pieces of code ask the computer to do and to check whether the output makes sense.
 
-!!! important "Today's Goal"
-    Use this cycle throughout the lab:
-
-    **Predict → Run → Look → Explain**
+!!! important "Today's Cycle"
+    **Predict → Run → Look → Explain → Modify**
 
 ---
 
@@ -37,55 +35,122 @@ At the top, add a **Markdown cell** containing:
 
 ```text
 Name:
+Group number:
 Group members:
+Assigned task:
 ```
-
-During the lab, one person may share a screen, but everyone should explain predictions and help check the output.
 
 ---
 
-# Part 1: Read and Run One Instruction
+## How the Group Activity Works
 
-Copy this code into a **code cell**:
+There are **eight groups with approximately three students in each group**. Each group will be assigned one task and will have approximately **10 minutes** to work.
+
+### Work Together—but Use Your Own Laptop
+
+This is group work, but **every student should complete the task in their own Google Colab notebook on their own laptop**.
+
+Group members should:
+
+1. read the task together
+2. discuss predictions before running the code
+3. help one another understand instructions and errors
+4. compare outputs
+5. discuss the AI-assisted modification
+6. make sure everyone can explain the code
+
+Do not have only one person complete the code while everyone else watches. Everyone should type or copy, run, modify, and inspect the code independently.
+
+### Suggested Use of Your 10 Minutes
+
+* **Minutes 1–2:** Read the task and make predictions.
+* **Minutes 3–6:** Run and modify the code on each laptop.
+* **Minutes 7–9:** Complete the AI-assisted modification.
+* **Minute 10:** Decide what your group will explain to the class.
+
+### When Your Group Shares
+
+One group member may share a screen. Other members should be ready to help explain:
+
+1. what the task asked Python to do
+2. what the group predicted
+3. what code the group ran or changed
+4. what output appeared
+5. how the group checked the result
+6. what the group learned from the AI-assisted modification
+
+---
+
+## Using AI During the Lab
+
+Each task ends with a small modification involving a Python idea that was not directly taught in class. You may use an approved AI assistant to help with that part.
+
+Start with a prompt such as:
+
+```text
+I am a Python beginner. Help me make the modification described below.
+Use the simplest possible code and explain only the new part in plain English.
+Do not change the parts of my code that already work.
+```
+
+Then add a Markdown cell to your notebook:
+
+```text
+AI prompt I used:
+
+New code AI suggested:
+
+What the new code does:
+
+How I verified the result:
+```
+
+!!! warning
+    AI-generated code is a proposed solution, not a verified solution. Run it, inspect the output, and decide whether it actually answers the question.
+
+---
+
+# Group 1: Store and Display a Headline
+
+Copy this code into a code cell:
 
 ```python
 headline = "AI Changes Journalism"
 print(headline)
 ```
 
-### Before You Run It
+### A. Predict and Explain
 
-Discuss these questions with your group:
+Before running the code, discuss:
 
 1. Which part is the variable name?
 2. What does `=` tell Python to do?
 3. Why does the headline need quotation marks?
-4. What do you predict will appear under the code cell?
+4. What do you predict will appear under the cell?
 
-### Run and Check
+Run the code and check your prediction.
 
-Run the cell. Did the output match your prediction?
+### B. Modify the Code
 
-Now change the headline to:
+Change the stored headline to `Gamecocks Win Season Opener`. Run the cell again and explain why the output changed.
 
-```text
-Gamecocks Win Season Opener
-```
+Then create a second variable called `source` that stores the text `The Daily News`. Print both variables.
 
-Run the cell again and confirm that the output changed.
+### C. AI-Assisted Modification: Print Both on One Line
 
-### Explain It in Plain English
+Ask AI to show you the simplest way to print the headline and source together on one line, separated by a hyphen.
 
-Complete this sentence in a Markdown cell:
+Your intended output is:
 
 ```text
-The first line tells Python to...
-The second line tells Python to...
+Gamecocks Win Season Opener - The Daily News
 ```
+
+Run the suggestion and verify that both pieces of text appear in the correct order.
 
 ---
 
-# Part 2: Store Several Headlines in a List
+# Group 2: Retrieve Items from a List
 
 Copy and run this code:
 
@@ -93,45 +158,14 @@ Copy and run this code:
 headlines = [
     "AI changes journalism",
     "Gamecocks win season opener",
-    "New music festival announced"
+    "New music festival announced",
+    "Local reporters test new technology"
 ]
-
-print(headlines)
 ```
 
-### Read the Code
+### A. Predict and Retrieve
 
-Discuss:
-
-1. What is the name of the variable?
-2. What do the square brackets `[ ]` mean here?
-3. How many headlines are in the list?
-4. Why does each headline have quotation marks?
-
-### Make One Change
-
-Add this fourth headline inside the list:
-
-```text
-Local reporters test new AI tool
-```
-
-Run the cell again. Check that all four headlines appear.
-
----
-
-# Part 3: Retrieve One Headline
-
-Python starts counting positions at `0`:
-
-```text
-0 = first item
-1 = second item
-2 = third item
-3 = fourth item
-```
-
-Before running the code, predict the output of each line:
+Before running these lines, predict each output:
 
 ```python
 print(headlines[0])
@@ -141,69 +175,119 @@ print(headlines[2])
 
 Run the code and check your predictions.
 
-### Your Turn
+### B. Modify the Code
 
-Write one line of code that prints the **fourth** headline.
+1. Write one line that prints the fourth headline.
+2. Change the second headline in the list to a headline of your choice.
+3. Run your retrieval code again and confirm that the new headline appears.
 
-!!! hint
-    Use the variable name, square brackets, and the position number.
-
-### Explain It
-
-Complete this sentence in a Markdown cell:
+Complete this explanation:
 
 ```text
-headlines[0] retrieves the __________ headline because Python starts counting at __________.
+headlines[0] retrieves the __________ item because Python starts counting at __________.
 ```
+
+### C. AI-Assisted Modification: Retrieve the Final Item Another Way
+
+Ask AI whether Python can retrieve the final list item without first counting the items. Ask it to explain the new index in plain English.
+
+Run the suggested code and verify that it returns the fourth headline.
 
 ---
 
-# Part 4: Repeat an Instruction with a Loop
+# Group 3: Count Items in a List
 
-Copy this code, but **predict what it will print before running it**:
-
-```python
-for headline in headlines:
-    print(headline)
-```
-
-### Translate the Code
-
-Read it in everyday language:
-
-```text
-For each __________ in the group called __________,
-show me that __________.
-```
-
-Run the code and inspect the output.
-
-### Notice the Indentation
-
-The spaces before `print(headline)` tell Python that the instruction belongs inside the loop. It should repeat for every headline.
-
-Now run this version:
+Copy this code:
 
 ```python
-for headline in headlines:
-    print(headline)
+headlines = [
+    "AI changes journalism",
+    "Gamecocks win season opener",
+    "New music festival announced"
+]
 
-print("Finished")
+print(len(headlines))
 ```
+
+### A. Predict and Explain
+
+Before running the code, discuss:
+
+1. What information is stored in `headlines`?
+2. What action does `len()` perform?
+3. What output do you predict?
+
+Run the code and check your prediction.
+
+### B. Modify the Code
+
+Add two new headlines inside the square brackets. Run the code again.
 
 Discuss:
 
-1. Which line repeats?
-2. Which line runs only once?
-3. How does the indentation help you tell the difference?
+1. How and why did the output change?
+2. Does `len()` count from zero, or report the total number of items?
+
+### C. AI-Assisted Modification: Add an Item with `.append()`
+
+Ask AI how to use `.append()` to add this headline after the list has already been created:
+
+```text
+Students learn Python in research methods
+```
+
+Print the list and its new length. Verify that the headline appears once and that the total increases by one.
 
 ---
 
-# Part 5: Use `if` to Print Only Matching Headlines
+# Group 4: Repeat an Instruction with a Loop
 
-A researcher wants to find headlines that contain the text `AI`.
+Copy this code:
 
-First, examine one headline:
+```python
+headlines = [
+    "AI changes journalism",
+    "Gamecocks win season opener",
+    "New music festival announced"
+]
+
+for headline in headlines:
+    print(headline)
+```
+
+### A. Predict and Explain
+
+Before running the code, discuss:
+
+1. How many lines of output do you predict?
+2. What does `headline` represent during each repetition?
+3. Why is `print(headline)` indented?
+
+Run the code and check your prediction.
+
+### B. Modify the Code
+
+Add this unindented line after the loop:
+
+```python
+print("Finished")
+```
+
+Run the code. Explain why each headline prints once but `Finished` prints only once.
+
+Then temporarily remove the indentation before `print(headline)`. Run the code, read the error, restore the indentation, and confirm that it works again.
+
+### C. AI-Assisted Modification: Number the Headlines
+
+Ask AI for a beginner-friendly way to number the printed headlines `1`, `2`, and `3`. Ask it to explain only the new Python idea.
+
+Run the suggestion. Verify that every headline still appears and that the displayed numbers begin with `1`.
+
+---
+
+# Group 5: Use `if` to Make a Decision
+
+Copy this code:
 
 ```python
 headline = "AI changes journalism"
@@ -212,16 +296,19 @@ if "AI" in headline:
     print("This headline mentions AI")
 ```
 
-### Before You Run It
+### A. Predict and Explain
 
-Discuss:
+Before running the code, discuss:
 
-1. What question is Python checking?
-2. Do you expect the message to print? Why?
+1. What True/False question is Python checking?
+2. Do you expect the message to print?
+3. Why is the `print()` line indented?
 
-Run the code and check your answer.
+Run the code and check your answers.
 
-Now change the headline to:
+### B. Modify the Code
+
+Change the stored headline to:
 
 ```python
 headline = "Gamecocks win season opener"
@@ -229,11 +316,19 @@ headline = "Gamecocks win season opener"
 
 Run the code again. Explain why no message appears.
 
+Then change the condition so Python searches for `Gamecocks`. Run it and verify the result.
+
+### C. AI-Assisted Modification: Add an `else`
+
+Ask AI how to make Python print `This headline does not mention AI` when the condition is not true. Ask it to use an `else` statement and explain how `if` and `else` work together.
+
+Test the code with one headline that mentions AI and one that does not. Verify that exactly one message appears for each headline.
+
 ---
 
-# Part 6: Combine a List, Loop, and `if`
+# Group 6: Combine a List, Loop, and `if`
 
-Return to this list:
+Copy this code:
 
 ```python
 headlines = [
@@ -242,61 +337,70 @@ headlines = [
     "New music festival announced",
     "Local reporters test new AI tool"
 ]
-```
 
-Now copy this code:
-
-```python
 for headline in headlines:
     if "AI" in headline:
         print(headline)
 ```
 
-### Predict → Run → Look → Explain
+### A. Predict and Explain
+
+Before running the code:
 
 1. Predict which headlines will print.
-2. Run the code.
-3. Compare the output with your prediction.
-4. Explain what each line does in everyday language.
+2. Identify the line that repeats.
+3. Identify the line that checks a condition.
+4. Explain why the final line has more indentation.
 
-Complete this explanation in a Markdown cell:
+Run the code and compare the output with your prediction.
+
+### B. Modify the Research Question
+
+Change the code so it prints only headlines containing `music`. Then add this headline to the list:
 
 ```text
-The loop takes one __________ at a time from __________.
-The if statement checks whether __________ appears in that headline.
-The print statement runs only when __________.
+Music fans discuss new concert venue
 ```
+
+Run the code again. Verify that the output answers the new question.
+
+### C. AI-Assisted Modification: Count the Matches
+
+Ask AI to modify the original AI-search code so it also counts how many headlines contain `AI`. Ask it to use a simple counter and explain the new lines.
+
+Run the suggestion. Verify the count by manually checking the four headlines yourself.
 
 ---
 
-# Part 7: Make the Search Ignore Capitalization
+# Group 7: Make a Search Ignore Capitalization
 
-Replace the final headline with this version:
+Copy this code:
 
 ```python
 headlines = [
     "AI changes journalism",
     "Gamecocks win season opener",
-    "New music festival announced",
     "Local reporters test new ai tool"
 ]
-```
 
-Notice that the last headline now contains lowercase `ai`.
-
-Run the earlier search again:
-
-```python
 for headline in headlines:
     if "AI" in headline:
         print(headline)
 ```
 
-### What Happened?
+### A. Predict and Investigate
 
-Did Python find both AI headlines? Why or why not?
+Before running the code, predict whether Python will print both headlines that discuss AI.
 
-Now use `.lower()` so capitalization does not matter:
+Run the code and discuss:
+
+1. Which expected headline is missing?
+2. What difference do you notice between `AI` and `ai`?
+3. Does Python treat uppercase and lowercase letters as identical here?
+
+### B. Modify the Code
+
+Use `.lower()` to make the search ignore capitalization:
 
 ```python
 for headline in headlines:
@@ -304,84 +408,91 @@ for headline in headlines:
         print(headline)
 ```
 
-### Explain the Dot
+Run the code and verify that both relevant headlines appear.
 
-Complete this sentence:
+Complete this explanation:
 
 ```text
-headline.lower() tells Python to use the __________ tool that belongs to the current __________.
+The dot tells Python to use the __________ tool that belongs to the current __________.
 ```
+
+### C. AI-Assisted Modification: Search for Two Possible Words
+
+Ask AI to modify the condition so the code prints a headline when it contains either `ai` or `technology`, regardless of capitalization. Ask it to explain the word `or`.
+
+Add a headline containing `technology`, run the code, and manually verify every match.
 
 ---
 
-# Part 8: Use AI to Explain—Then Verify
+# Group 8: Debug and Verify a Small Workflow
 
-Ask an approved AI assistant:
+This code should print only headlines containing `AI`, but it has problems:
 
-```text
-Explain this code one line at a time in plain English for someone learning Python:
+```python
+headlines = [
+    "AI changes journalism",
+    "Gamecocks win season opener",
+    "Local reporters test new AI tool"
+]
 
-for headline in headlines:
-    if "ai" in headline.lower():
-        print(headline)
+for headline in headlines
+if "AI" in headline:
+print(headline)
 ```
 
-Add a Markdown cell containing:
+### A. Predict the Intended Result
+
+Before running the code:
+
+1. Identify which headlines should print if the code works.
+2. Identify the list, loop, condition, and action.
+
+### B. Debug One Problem at a Time
+
+Run the code and read the first error. Fix one problem, run the code again, and continue until the intended headlines appear.
+
+Keep a record in a Markdown cell:
 
 ```text
-AI prompt I used:
+Problem 1:
+How we fixed it:
 
-One part of the explanation that helped me:
+Problem 2:
+How we fixed it:
 
-How my group verified the explanation:
+How we verified the final output:
 ```
 
-Remember: **AI-generated explanations and code are proposed answers.** You still need to run the code and inspect whether the result makes sense.
+### C. AI-Assisted Modification: Request Hints, Not the Whole Answer
 
----
-
-# Optional Challenge: Change the Research Question
-
-Only begin this section after completing Parts 1–8.
-
-Use the same list of headlines, but change the code so it prints only headlines containing the word `music`.
-
-Then add this new headline to your list:
+If your group becomes stuck, ask AI:
 
 ```text
-Music fans discuss AI-generated songs
+Explain the first remaining problem in this Python code.
+Give me one hint, but do not rewrite the full solution.
 ```
 
-Run your code again and check whether the new result makes sense.
-
----
-
-# Screen Sharing
-
-When your group shares, briefly show:
-
-1. one prediction your group made
-2. the code you ran
-3. the output
-4. one line translated into everyday language
-5. one way you checked that the result made sense
-
-You do not need a perfect solution. A surprising output or error is useful if your group can explain what you tried and what you learned.
+After the code works, ask AI to add one final unindented line that reports `Search finished`. Verify that it appears once, after all matching headlines.
 
 ---
 
 # What You Practiced
 
-By the end of this lab, you should have practiced how to:
+By the end of the lab, the class should have practiced how to:
 
-* use a variable to store text
-* use a list to store several pieces of text
-* retrieve one list item using its position
-* repeat an instruction with a loop
-* recognize why indentation matters
+* store text with variables
+* group text in lists
+* retrieve list items with indexes
+* count items with `len()`
+* repeat instructions with loops
+* use indentation to show which instructions repeat
 * use `if` and `in` to check a condition
-* use `.lower()` to make a text search ignore capitalization
-* translate short code into everyday language
-* predict, run, inspect, and verify output
-* use AI to support understanding without giving up verification
+* use `.lower()` to make a search ignore capitalization
+* read and respond to simple errors
+* modify code for a slightly different research question
+* use AI to learn one small new Python idea
+* verify AI-generated code by inspecting the output
+
+!!! note
+    Different groups will work with different Python ideas. During screen sharing, focus on understanding how each group translated its code into everyday language and verified its result.
 
