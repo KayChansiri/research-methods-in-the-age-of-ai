@@ -19,6 +19,45 @@ The goal is **not to memorize Python syntax** or conduct a real content analysis
 
 ---
 
+## The Research Story
+
+Imagine that a research team wants to understand how college students experience TikTok. The researchers are especially interested in how students describe:
+
+* TikTok's recommendation algorithm
+* advertisements
+* discovering new creators
+* repetitive content
+* losing track of time while scrolling
+
+The researchers ask students an open-ended survey question:
+
+> **What do you like or dislike about your experience using TikTok?**
+
+Each student writes a short response. The research team now has many comments, such as:
+
+```text
+The algorithm knows what I like.
+There are too many ads now.
+I like discovering new creators.
+The For You page feels repetitive.
+Sometimes I lose track of time while scrolling.
+```
+
+Reading a few comments by hand is easy. If the researchers collected hundreds or thousands of comments, however, they might use Python to help organize the comments, retrieve particular responses, repeat the same step for every response, and find comments containing specific words.
+
+### Our Research Question
+
+For this lab, we will ask:
+
+> **How can Python help us organize and explore students' comments about their TikTok experiences?**
+
+Each group will practice one small part of that research workflow. No group will answer the entire research question alone. When the groups share their results, we will combine the pieces to see how a larger Python workflow is built.
+
+!!! note
+    All comments and participant IDs in this lab are fictional and are used only to practice Python. Finding a word in a comment does not, by itself, tell us what all TikTok users think or whether an experience is positive or negative.
+
+---
+
 ## Before You Begin
 
 Open a new Google Colab notebook:
