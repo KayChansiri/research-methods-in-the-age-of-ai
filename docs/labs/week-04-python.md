@@ -1,121 +1,108 @@
-# Week 4 Lab: AI-Assisted Literature Prioritization with Hugging Face + Colab
+# Week 4 Lab: Human + AI Literature Screening
 
-## Overview
+## What this lab is about
 
-In this lab, you will explore how a pretrained Transformer model can help prioritize candidate literature for a research question.
+Today, your group will use the **abstracts you already collected** to ask one research-methods question:
 
-The goal is **not** to automate or replace a systematic literature review. Instead, you will examine where AI-assisted screening may be useful, where human judgment remains necessary, and what kinds of evidence would be needed before relying on a model for literature screening.
+> **Can an AI model help us decide which articles are relevant to our research question?**
 
-By the end of the lab, you should be able to:
+The goal is **not** to learn or memorize the Hugging Face or pandas code. The code is provided. Your job is to **run it, inspect the output, compare it with human judgment, and decide when the AI is useful or wrong.**
 
-* Load a literature dataset into Google Colab
-* Use a pretrained Hugging Face model to classify article abstracts
-* Compare your own judgment with the model's judgment
-* Examine disagreements between human and model decisions
-* Revise classification labels and evaluate whether the output improves
-* Save model results for review and submission
+### Not required for the Block 1 exam
 
----
+You do **not** need to memorize `pipeline()`, pandas/DataFrame commands, Hugging Face syntax, or the AI-classification code in this lab.
 
-## 1. Prepare Your Group Dataset
+You **should** understand the research logic:
 
-Each group should have:
-
-* One research question
-* **3 peer-reviewed article abstracts per person**
-* About **12–15 abstracts total** for a group of 4–5
-* One combined `.csv` file
-* Abstracts from **peer-reviewed journal articles only**
-
-Your CSV file should include at least these columns:
-
-```text
-Group Member,abstract
-Max,"This study examines how journalists use generative AI in daily work..."
-Alex,"Using survey data, this study explores how young adults encounter news..."
-Sarah,"This article analyzes how platform users evaluate health misinformation..."
-```
-
-Each student's name should appear next to the abstracts they personally contributed.
+**Research question → Human judgment → AI judgment → Compare → Validate**
 
 ---
 
-## 2. Open Google Colab and Upload Your CSV
+## 1. Start with the work your group already completed
 
-Open a new Google Colab notebook.
+Your group should already have:
 
-Upload your group's CSV file to Colab.
+- One research question
+- 3 peer-reviewed article abstracts per person
+- About 12–15 abstracts total
+- One combined `.csv` file
+- At least these two columns: `Group Member` and `abstract`
 
-Then load the file using pandas:
+Do **not** find a new set of abstracts for this lab.
+
+---
+
+## 2. Human judgment comes FIRST
+
+Before running the AI model, return to the **3 abstracts you personally contributed**.
+
+For each abstract, privately choose one judgment:
+
+- **Clearly relevant** — directly helps answer your research question
+- **Possibly relevant** — related, but the connection is incomplete or uncertain
+- **Probably unrelated** — does not really help answer your research question
+
+Write down your judgments before looking at the AI results. **Do not change your original judgment after seeing the AI prediction.**
+
+---
+
+## 3. Open Google Colab
+
+Open a new Google Colab notebook. You will copy and run the code below.
+
+### Code A — Install and import the tools
+
+> **Just run this cell. You do not need to memorize it.**
 
 ```python
-import pandas as pd
+!pip -q install transformers
 
-df = pd.read_csv("your_file_name.csv")
+import pandas as pd
+from google.colab import files
+from transformers import pipeline
+```
+
+In plain English: **Get the tools we need.**
+
+---
+
+## 4. Upload your group's CSV
+
+### Code B — Upload and open your file
+
+```python
+uploaded = files.upload()
+filename = next(iter(uploaded))
+
+df = pd.read_csv(filename)
+df.columns = df.columns.str.strip()
 
 df.head()
 ```
 
-Check that:
+In plain English: **Upload our file → open it as a table → show the first few rows.**
 
-* The file loads correctly
-* Each row contains one abstract
-* The correct group member is listed for each abstract
+Check that you can see your abstracts. Your file must contain a column named `abstract`.
 
 ---
 
-## 3. Human Judgment Comes First
+## 5. Tell the notebook your research question
 
-Before looking at any AI output, return to the **3 abstracts you personally contributed**.
-
-Read each abstract yourself and decide how relevant it is to your group's research question.
-
-Use one of these labels:
-
-* **Clearly relevant**
-* **Possibly relevant**
-* **Probably unrelated**
-
-Record your judgment before running the model.
-
-Do not change your original judgment after seeing what the AI predicts.
-
-The purpose is to compare your own reasoning with the model's reasoning later.
-
----
-
-## 4. Define the Classification Task
-
-The model does not independently know what your research question means by "relevant."
-
-You must define the possible labels.
-
-For example, imagine your research question is:
-
-> How is generative AI changing journalists' professional practices?
-
-You might begin with labels such as:
+### Code C — CHANGE ONLY the text between the quotation marks
 
 ```python
-candidate_labels = [
-    "relevant to the research question",
-    "not relevant to the research question"
-]
+research_question = "How does social media coverage influence fans' perceptions of athletes?"
+
+print(research_question)
 ```
 
-These labels tell the model what kinds of categories it should compare against.
+Replace the example with **your group's research question**. Keep the quotation marks.
 
 ---
 
-## 5. Load a Pretrained Hugging Face Model
+## 6. Load the AI model
 
-We will use a pretrained model through Hugging Face's `pipeline()` function.
-
-```python
-from transformers import pipeline
-```
-
-Create a zero-shot classification pipeline:
+### Code D — Just run this cell
 
 ```python
 classifier = pipeline(
@@ -124,297 +111,160 @@ classifier = pipeline(
 )
 ```
 
-This allows us to give the model an abstract and a set of possible labels without training a new model ourselves.
+The first run may take a few minutes because Colab has to download the model.
+
+In plain English: **Load an existing model that can compare text with categories we provide.**
 
 ---
 
-## 6. Try One Abstract First
+## 7. Try ONE abstract first
 
-Before processing the full dataset, test the model on one abstract.
+### Code E — Create the three screening categories
 
 ```python
-abstract = df.loc[0, "abstract"]
+candidate_labels = [
+    f"clearly relevant to the research question: {research_question}",
+    f"possibly relevant to the research question: {research_question}",
+    f"probably unrelated to the research question: {research_question}"
+]
+```
+
+### Code F — Ask the model about the first abstract
+
+```python
+abstract = str(df.loc[0, "abstract"])
 
 result = classifier(
     abstract,
-    candidate_labels
+    candidate_labels,
+    hypothesis_template="This abstract is {}."
 )
 
-result
+print("ABSTRACT:")
+print(abstract)
+print("\nAI'S TOP JUDGMENT:")
+print(result["labels"][0])
+print("\nMODEL SCORE:")
+print(round(result["scores"][0], 3))
 ```
 
-Look at:
+Stop here and discuss:
 
-* Which label received the highest score?
-* How confident was the model?
-* Does the prediction make sense based on your research question?
-
-Ask yourself:
-
-**Do you agree or disagree with the model? Why?**
+1. What judgment did the model make?
+2. Do you agree?
+3. What words or ideas in the abstract may have influenced the judgment?
+4. Remember: **a high score is model confidence, not proof that the judgment is correct.**
 
 ---
 
-## 7. Process the Full Abstract Dataset
+## 8. Run the same procedure on ALL abstracts
 
-Once your group understands how the model works, apply it to the full dataset.
-
-One simple approach is:
+### Code G — Just run this cell
 
 ```python
-def classify_abstract(text):
+def screen_abstract(text):
+    text = str(text)
     result = classifier(
         text,
-        candidate_labels
+        candidate_labels,
+        hypothesis_template="This abstract is {}."
     )
-    
-    return result["labels"][0]
+    top_label = result["labels"][0]
+
+    if top_label.startswith("clearly relevant"):
+        return "Clearly relevant"
+    elif top_label.startswith("possibly relevant"):
+        return "Possibly relevant"
+    else:
+        return "Probably unrelated"
+
+
+df["AI Judgment"] = df["abstract"].apply(screen_abstract)
+
+df[["Group Member", "abstract", "AI Judgment"]]
 ```
 
-Then apply the function to each abstract:
+**You do not need to understand every line.** Read the overall logic:
 
-```python
-df["AI Judgment"] = df["abstract"].apply(classify_abstract)
-```
+> For each abstract → ask the same model → use the same categories → save the AI judgment.
 
-Preview the results:
-
-```python
-df.head()
-```
+That is the research idea of **systematic repetition**.
 
 ---
 
-## 8. Compare Your Judgment with the AI Judgment
+## 9. Compare HUMAN vs. AI
 
-Now return to the **3 abstracts you personally contributed**.
+Return to the **3 abstracts you personally contributed**.
 
-For each of your abstracts:
-
-1. Compare your original human judgment with the AI judgment.
-2. Decide whether you agree with the AI.
-3. Record **Yes** or **No**.
-4. Write a short explanation.
-
-If you **agree with the AI**:
-
-* Explain what evidence in the abstract supports the AI judgment.
-
-If you **disagree with the AI**:
-
-* Explain what the model may have misunderstood, overlooked, or interpreted incorrectly.
-
-If you are **unsure**:
-
-* Discuss that abstract with your group.
-* Listen to your peers' reasoning.
-* Then make **your own final Yes/No decision**.
-
-You are responsible for completing the rows corresponding to **your own abstracts**.
-
-Your table should look like this:
-
-| Group Member | Abstract | Human Judgment    | AI Judgment  | Agree with AI? | Reason                                                                             |
-| ------------ | -------- | ----------------- | ------------ | -------------- | ---------------------------------------------------------------------------------- |
-| Alex         | ...      | Clearly relevant  | Relevant     | Yes            | The abstract directly examines AI use in journalistic work.                        |
-| Maya         | ...      | Possibly relevant | Not relevant | No             | The model may have missed the connection between automation and newsroom practice. |
-
----
-
-## 9. Change the Labels
-
-The first labels you choose may be too broad.
-
-Now revise the candidate labels so they better reflect your research question.
-
-For example, instead of:
-
-```python
-candidate_labels = [
-    "relevant",
-    "not relevant"
-]
-```
-
-you might try:
-
-```python
-candidate_labels = [
-    "directly examines generative AI in journalists' professional work",
-    "mentions journalism but does not examine generative AI use",
-    "not related to the research question"
-]
-```
-
-Run the model again using your updated labels.
-
-Ask:
-
-* Did the predictions become more useful?
-* Did any previous disagreements disappear?
-* Did new disagreements appear?
-* Why might changing the labels change the model's judgment?
-
----
-
-## 10. Run the Updated Model on the Full Dataset
-
-Apply the revised labels to the full abstract dataset.
-
-For example:
-
-```python
-def classify_abstract_updated(text):
-    result = classifier(
-        text,
-        candidate_labels
-    )
-    
-    return result["labels"][0]
-```
-
-Then:
-
-```python
-df["Updated AI Judgment"] = df["abstract"].apply(
-    classify_abstract_updated
-)
-```
-
-Preview the results:
-
-```python
-df.head()
-```
-
----
-
-## 11. Save Your Results
-
-Save your completed dataset as a new CSV file.
-
-```python
-df.to_csv(
-    "week4_ai_literature_results.csv",
-    index=False
-)
-```
-
-Download the file from Colab and make sure your group keeps a copy.
-
----
-
-## 12. Final Human–AI Comparison
-
-After running the updated model, review your own abstracts again.
-
-For each abstract you contributed, your final table should include:
-
-* Group member name
-* Abstract
-* Your original human judgment
-* AI judgment
-* Agree with AI: Yes or No
-* Brief reason
-
-Your reason should explain **why** you agree or disagree.
-
-Do not simply write:
-
-```text
-Yes, I agree.
-```
-
-Instead, connect your explanation to the abstract and the research question.
-
-For example:
-
-```text
-Yes. The abstract directly examines how journalists use generative AI in their daily professional workflow.
-```
-
-Or:
-
-```text
-No. The abstract discusses digital journalism broadly, but it does not examine generative AI use, which is central to our research question.
-```
-
----
-
-## 13. Discuss One Interesting Disagreement
-
-As a group, identify **one disagreement** that you think is especially useful or interesting.
-
-Be prepared to briefly explain:
-
-* Your research question
-* The abstract
-* The human judgment
-* The model judgment
-* Whether the human reviewer agreed or disagreed with the AI
-* Why the disagreement may have occurred
-* What you would do next as a researcher
-
-Possible reasons for disagreement include:
-
-* The abstract is genuinely ambiguous
-* The labels are too broad
-* The labels are poorly defined
-* Important context is missing from the abstract
-* The model focused on the wrong words
-* Human reviewers interpreted the research question differently
-
----
-
-## Assignment 2 Deliverable
-
-Submit **one agreement table file per group** on Blackboard.
-
-**Due: 5:00 PM tomorrow**
-
-The file should include:
+For each one, complete this table:
 
 | Group Member | Abstract | Human Judgment | AI Judgment | Agree with AI? | Reason |
-| ------------ | -------- | -------------- | ----------- | -------------- | ------ |
+| --- | --- | --- | --- | --- | --- |
+| Alex | ... | Clearly relevant | Clearly relevant | Yes | The abstract directly studies the exposure and outcome in our question. |
+| Maya | ... | Possibly relevant | Probably unrelated | No | The model may have missed an indirect connection to our outcome. |
 
-Although the group submits one combined file, **each student is responsible for the rows corresponding to the abstracts they personally contributed**.
-
-Your individual portion will be evaluated based on whether you:
-
-* Completed your assigned abstracts
-* Made a clear human judgment
-* Compared that judgment with the model
-* Provided a meaningful Yes/No agreement decision
-* Explained your reasoning using evidence from the abstract and the research question
+Your **Reason** is the most important part. Explain what evidence in the abstract supports your decision.
 
 ---
 
-## Before You Leave
+## 10. Find ONE interesting disagreement
 
-Consider this question:
+As a group, choose one case where the human and AI judgments differ—or one case where you almost disagreed.
 
-**Would you allow this model to automatically exclude papers from your literature review?**
+Be ready to explain:
 
-Think about:
+- Your research question
+- The human judgment
+- The AI judgment
+- Why the disagreement may have happened
+- What you would do next as the researcher
 
-* Why or why not?
-* What kinds of errors would matter most?
-* What evidence would you need before trusting the model?
-* Where should human judgment remain in the workflow?
+Possible explanations include:
+
+- The abstract is genuinely ambiguous
+- Your definition of relevance is too broad or too vague
+- Important information is missing from the abstract
+- The model focused on the wrong words
+- The human reviewer interpreted the research question differently
 
 ---
 
-## Key Takeaway
+## 11. Save the AI results
 
-AI can help researchers **screen and prioritize abstracts**, especially when working with larger collections of literature.
+### Code H — Run this cell
 
-However, human judgment is still needed to:
+```python
+df.to_csv("week4_ai_results.csv", index=False)
+files.download("week4_ai_results.csv")
+```
 
-* Define what relevance means
-* Evaluate ambiguous cases
-* Interpret disagreements
-* Refine classification labels
-* Protect against accidentally excluding important studies
+In plain English: **Save the table → download a copy.**
 
-A reproducible Python workflow makes AI-assisted literature screening easier to **inspect, critique, compare, and improve**.
+---
 
+# Assignment 2 Deliverable
+
+Submit **one agreement table per group** on Blackboard.
+
+Your table should include:
+
+| Group Member | Abstract | Human Judgment | AI Judgment | Agree with AI? | Reason |
+| --- | --- | --- | --- | --- | --- |
+
+Each student is responsible for the rows corresponding to the **3 abstracts they personally contributed**.
+
+The assignment is about your **research judgment**, not your ability to memorize Python.
+
+---
+
+## If you finish early: optional challenge
+
+Ask your group:
+
+> **Would you allow this model to automatically EXCLUDE papers from a real literature review? Why or why not?**
+
+Think especially about a **false exclusion**: the AI says a paper is unrelated, but the paper is actually important.
+
+### Key takeaway
+
+**AI can assist with repetitive screening. The researcher still defines relevance, checks disagreements, and makes the final decision.**
