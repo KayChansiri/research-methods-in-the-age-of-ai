@@ -31,5 +31,16 @@ Course materials are released progressively and may be updated as the semester d
 
     [Session 1 slides](week-0401.pdf)  
     [Session 2 slides](week-0402.pdf)
+    
+-   **Week 5**
+
+    Exam preparation and Block 1 exam. No lectures.
+
+-   **Week 6**
+
+    Python Meets Pretrained Language Models
+
+    [Session 1 slides](week-0601.pdf)  
+    [Session 2 slides](week-0602.pdf)
 
 </div>
